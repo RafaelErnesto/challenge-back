@@ -13,6 +13,9 @@ export class Author {
     }
 
     static create(data: AuthorData) {
+        if(data.name.length === 0) {
+            throw new InvalidAuthorName(data.name)
+        }
         return new Author(data.name)
     }
 

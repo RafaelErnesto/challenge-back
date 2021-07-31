@@ -4,7 +4,8 @@
   "description": "![alt tag](https://static.wixstatic.com/media/7f8adc_d803ec63e9e443a288209456ce076e0f~mv2.png/v1/fill/w_132,h_26,al_c,q_85,usm_0.66_1.00_0.01/ChatClass_logo.webp)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "repository": {
     "type": "git",

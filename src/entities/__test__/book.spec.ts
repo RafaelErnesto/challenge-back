@@ -34,4 +34,15 @@ describe('Book entity tests', () => {
             })
         }).toThrow()
     })
+
+    it('Ensure Book Entity throws when publication_year is negative', () => {
+        expect(() => {
+            Book.create({
+                name: 'Test title',
+                edition: 1,
+                publication_year: -2021,
+                authors: ['id_1', 'id_2'],
+            })
+        }).toThrow()
+    })
 })

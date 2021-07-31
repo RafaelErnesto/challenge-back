@@ -1,4 +1,5 @@
 import { InvalidBookName } from './errors/invalid-book-name'
+import { NegativeEditionNumber } from './errors/negative-edition-number'
 
 interface BookData {
     name: string
@@ -29,6 +30,10 @@ export class Book {
     private static validate(data: BookData) {
         if(data.name.length === 0) {
             throw new InvalidBookName(data.name)
+        }
+
+        if(data.edition < 0) {
+            throw new NegativeEditionNumber()
         }
     }
 }

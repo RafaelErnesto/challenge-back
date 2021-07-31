@@ -1,3 +1,4 @@
+import { InvalidBookName } from './errors/invalid-book-name'
 
 interface BookData {
     name: string
@@ -21,6 +22,13 @@ export class Book {
     }
 
     public static create(data: BookData) {
+        Book.validate(data)
         return new Book(data.name, data.edition, data.publication_year, data.authors)
+    }
+
+    private static validate(data: BookData) {
+        if(data.name.length === 0) {
+            throw new InvalidBookName(data.name)
+        }
     }
 }

@@ -1,6 +1,6 @@
 import { InvalidBookName } from './errors/invalid-book-name'
 import { NegativeEditionNumber } from './errors/negative-edition-number'
-
+import { NegativePublicationYearNumber } from './errors/negative-publication-year'
 interface BookData {
     name: string
     edition: number
@@ -34,6 +34,10 @@ export class Book {
 
         if(data.edition < 0) {
             throw new NegativeEditionNumber()
+        }
+
+        if(data.publication_year < 0) {
+            throw new NegativePublicationYearNumber()
         }
     }
 }

@@ -1,6 +1,7 @@
 import { InvalidBookName } from './errors/invalid-book-name'
 import { NegativeEditionNumber } from './errors/negative-edition-number'
 import { NegativePublicationYearNumber } from './errors/negative-publication-year'
+import { EmptyAuthorsArray } from './errors/empty-authors-array'
 interface BookData {
     name: string
     edition: number
@@ -38,6 +39,10 @@ export class Book {
 
         if(data.publication_year < 0) {
             throw new NegativePublicationYearNumber()
+        }
+
+        if(data.authors.length === 0) {
+            throw new EmptyAuthorsArray()
         }
     }
 }

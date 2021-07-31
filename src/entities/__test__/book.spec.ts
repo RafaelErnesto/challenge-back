@@ -11,4 +11,15 @@ describe('Book entity tests', () => {
 
         expect(book).toBeInstanceOf(Book)
     })
+
+    it('Ensure Book Entity throws when name is empty', () => {
+        expect(() => {
+            Book.create({
+                name: '',
+                edition: 123,
+                publication_year: 2021,
+                authors: ['id_1', 'id_2'],
+            })
+        }).toThrow()
+    })
 })

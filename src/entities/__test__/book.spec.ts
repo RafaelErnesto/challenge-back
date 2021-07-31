@@ -45,4 +45,15 @@ describe('Book entity tests', () => {
             })
         }).toThrow()
     })
+
+    it('Ensure Book Entity throws when authors is empty', () => {
+        expect(() => {
+            Book.create({
+                name: 'Test title',
+                edition: 1,
+                publication_year: 2021,
+                authors: [],
+            })
+        }).toThrow()
+    })
 })

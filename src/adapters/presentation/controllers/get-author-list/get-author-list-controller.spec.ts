@@ -16,4 +16,14 @@ describe('GetAuthorListController test', () => {
         expect(response.statusCode).toBe(200)
         expect(response.body.length).toBeGreaterThan(0)
     })
+    it('Should return statusCode 200 and filtered authors list', async () => {
+        const sut = getSut()
+        const response = await sut.handle({
+            body: {
+                filter: 'J'
+            }
+        })
+        expect(response.statusCode).toBe(200)
+        expect(response.body.length).toBe(3)
+    })
 })

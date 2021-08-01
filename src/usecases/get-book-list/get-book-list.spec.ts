@@ -20,4 +20,11 @@ describe('Get books test', () => {
         expect(result[0].name).toEqual("Book 1")
         expect(result.length).toEqual(1)
     })
+
+    it('Retrieve book by publication year', async () => {
+        const sut = getSut()
+        const result = await sut.getBooks({publication_year: 2018})
+        expect(result[0].publication_year).toEqual(2018)
+        expect(result.length).toEqual(1)
+    })
 })

@@ -9,8 +9,8 @@ export class GetAuthorList implements GetAuthorListUseCase {
         this.authorRepository = authorRepository
     }
 
-    async getAuthorList(): Promise<AuthorResponseData[]> {
-        const authors = await this.authorRepository.getAllAuthors()
+    async getAuthorList(page: number = 1, filter?:string): Promise<AuthorResponseData[]> {
+        const authors = await this.authorRepository.getAllAuthors(page,filter)
         return new Promise(resolve => resolve(authors))
     }
 

@@ -10,6 +10,6 @@ export interface AuthorResponseData {
 export interface BookRepositoryInterface {
    addBook(data: BookData): Promise<BookResponseData>
    getBooks(filters?: BookOptions): Promise<BookResponseData[]>
-   updateBook(data: BookData): Promise<BookResponseData>
+   updateBook(data: BookData, id: string): Promise<BookResponseData>
    deleteBook(id: string): Promise<string>
 }

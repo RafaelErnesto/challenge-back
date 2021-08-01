@@ -26,4 +26,18 @@ describe('UpdateBookController test', () => {
         expect(response.statusCode).toBe(200)
         expect(response.body.name).toEqual('Updated Book')
     })
+
+    it('Ensure UpdateBookController returns statusCode 400 when parameter is missing', async () => {
+        const sut = getSut()
+        expect(async () => {
+            await sut.handle({
+                body: {
+                    edition: 1,
+                    publication_year: 2001,
+                    authors: ['b9jg'],
+                    id: 'asm3'
+                }
+            })
+        }).rejects.toBeInstanceOf('MissingParamterError')
+    })
 })

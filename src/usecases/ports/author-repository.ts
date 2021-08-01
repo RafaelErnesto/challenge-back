@@ -6,7 +6,7 @@ export interface AuthorResponseData {
 }
 
 export interface AuthorRepositoryInterface {
-    getAllAuthors(): Promise<AuthorResponseData[]>
+    getAllAuthors(page:number, filter?:string): Promise<AuthorResponseData[]>
     getAuthorByName(name: string): Promise<AuthorResponseData>
     getAuthorById(id: any): Promise<AuthorResponseData>
     addAuthor(data: AuthorData) : Promise<AuthorResponseData>

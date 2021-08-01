@@ -13,7 +13,15 @@ export class GetAuthorListController implements BaseController {
     }
 
     async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
-        const result = await this.getAuthorList.getAuthorList()
+        let page = 1
+        let filter = undefined
+        if(httpRequest.body?.page) {
+            page = httpRequest.body.page
+        }
+        if(httpRequest.body?.filter) {
+            filter = httpRequest.body.filter
+        }
+        const result = await this.getAuthorList.getAuthorList(page, filter)
         return new Promise(resolve => resolve(ok(result)))
     }
     

@@ -47,7 +47,8 @@ export class BookInMemoryRepository implements BookRepositoryInterface {
     }
 
     deleteBook(id: string): Promise<string> {
-        throw new Error("Method not implemented.");
+        this.books = this.books.filter((book: BookResponseData) => book.id !== id)
+        return new Promise(resolve => resolve('Deleted'))
     }
     
 }

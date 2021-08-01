@@ -20,7 +20,7 @@ export class BookInMemoryRepository implements BookRepositoryInterface {
         }))
     }
     getBooks(filters?: any): Promise<BookResponseData[]> {
-        throw new Error("Method not implemented.");
+        return new Promise(resolve => resolve(this.books))
     }
     updateBook(data: BookData): Promise<BookResponseData> {
         throw new Error("Method not implemented.");

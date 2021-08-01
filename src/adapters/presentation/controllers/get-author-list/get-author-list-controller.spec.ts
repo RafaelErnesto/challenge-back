@@ -26,4 +26,14 @@ describe('GetAuthorListController test', () => {
         expect(response.statusCode).toBe(200)
         expect(response.body.length).toBe(3)
     })
+
+    it('Should return statusCode 400 when filter is not a string', async () => {
+        const sut = getSut()
+        const response = await sut.handle({
+            body: {
+                filter: 2
+            }
+        })
+        expect(response.statusCode).toBe(400)
+    })
 })

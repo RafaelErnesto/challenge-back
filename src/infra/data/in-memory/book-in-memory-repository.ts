@@ -38,8 +38,13 @@ export class BookInMemoryRepository implements BookRepositoryInterface {
         return new Promise(resolve => resolve(result))
     }
 
-    updateBook(data: BookData): Promise<BookResponseData> {
-        throw new Error("Method not implemented.");
+    updateBook(data: BookData, id: string): Promise<BookResponseData> {
+        const bookToUpdate = this.books.filter((book: BookResponseData) => book.id === id)
+        bookToUpdate.name = data.name
+        bookToUpdate.publication_year = data.publication_year
+        bookToUpdate.edition = data.edition
+        bookToUpdate.authors = data.authors
+        return new Promise(resolve => resolve(bookToUpdate))
     }
 
     deleteBook(id: string): Promise<string> {

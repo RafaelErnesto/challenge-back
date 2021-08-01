@@ -1,5 +1,5 @@
 import { GetAuthorListUseCase } from "../../../../usecases/get-author-list/get-author-list-use-case";
-import { ok } from "../helpers/http-helper";
+import { ok , badRequest} from "../helpers/http-helper";
 import { BaseController } from "../http/base-controller";
 import { HttpRequest } from "../http/http-request";
 import { HttpResponse } from "../http/http-response";
@@ -20,6 +20,9 @@ export class GetAuthorListController implements BaseController {
         }
         if(httpRequest.body?.filter) {
             filter = httpRequest.body.filter
+        }
+        if(filter && typeof filter !== 'string') {
+            return badRequest('Filter must be string')
         }
         const result = await this.getAuthorList.getAuthorList(page, filter)
         return new Promise(resolve => resolve(ok(result)))

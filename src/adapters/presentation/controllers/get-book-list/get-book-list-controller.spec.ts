@@ -16,4 +16,18 @@ describe('GetBookController test', () => {
         expect(books.statusCode).toBe(200)
         expect(books.body.length).toEqual(2)
     })
+
+    it('Ensure GetBookController returns statusCode 200 and list of books filtered by name', async () => {
+        const sut = getSut()
+        const books = await sut.handle({
+            body: {
+                filters: {
+                    name: 'Book 2'
+                }
+            }
+        })
+        expect(books.statusCode).toBe(200)
+        expect(books.body.length).toEqual(1)
+        expect(books.body[0].name).toEqual('Book 2')
+    })
 })

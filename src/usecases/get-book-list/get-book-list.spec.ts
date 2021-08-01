@@ -27,4 +27,11 @@ describe('Get books test', () => {
         expect(result[0].publication_year).toEqual(2018)
         expect(result.length).toEqual(1)
     })
+
+    it('Retrieve book by edition', async () => {
+        const sut = getSut()
+        const result = await sut.getBooks({edition: 1})
+        expect(result[0].edition).toEqual(1)
+        expect(result.length).toEqual(1)
+    })
 })

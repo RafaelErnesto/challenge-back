@@ -1,6 +1,6 @@
 import { InvalidAuthorName } from "./errors/invalid-author-name";
 
-interface AuthorData {
+export interface AuthorData {
     name: string
 }
 

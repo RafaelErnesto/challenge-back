@@ -34,4 +34,11 @@ describe('Get books test', () => {
         expect(result[0].edition).toEqual(1)
         expect(result.length).toEqual(1)
     })
+
+    it('Retrieve book by author', async () => {
+        const sut = getSut()
+        const result = await sut.getBooks({authors: ["l8cs"]})
+        expect(result[0].authors[0]).toEqual("l8cs")
+        expect(result.length).toEqual(1)
+    })
 })

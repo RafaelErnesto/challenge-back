@@ -14,4 +14,11 @@ describe('Delete book usecase test', () => {
         const result = await sut.deleteBook('l8cs')
         expect(result).toEqual('The book was deleted')
     })
+
+    it('DeleteBook rejects when id is empty', () => {
+        const sut = getSut()
+        expect(async () => {
+            await sut.deleteBook('')
+        }).rejects.toMatch('Empty id passed on book deletion')
+    })
 })

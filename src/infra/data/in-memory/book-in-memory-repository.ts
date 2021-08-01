@@ -31,6 +31,10 @@ export class BookInMemoryRepository implements BookRepositoryInterface {
         if(filters?.edition) {
             result = result.filter((book: any) => book.edition === filters.edition)
         }
+
+        if(filters?.authors) {
+            result = result.filter((book: any) => JSON.stringify(book.authors) === JSON.stringify(filters.authors))
+        }
         return new Promise(resolve => resolve(result))
     }
 

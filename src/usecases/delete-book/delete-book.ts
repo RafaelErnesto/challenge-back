@@ -9,6 +9,9 @@ export class DeleteBook implements DeleteBookUseCase {
     }
 
     async deleteBook(id: string): Promise<string> {
+        if(id.length === 0) {
+            return new Promise((resolve, reject) => reject('Empty id passed on book deletion'))
+        }
         await this.bookRepository.deleteBook(id)
         return new Promise(resolve => resolve('The book was deleted'))
     }

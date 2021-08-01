@@ -16,9 +16,13 @@ export class AuthorInMemoryRepository implements AuthorRepositoryInterface {
        return new Promise(resolve => resolve(response))
     }
 
-    getAllAuthors(): Promise<AuthorResponseData[]> {
+    getAllAuthors(page:number = 1,filter?:string): Promise<AuthorResponseData[]> {
+        let authorsList = this.authors
+        if(filter) {
+            authorsList = authorsList.filter((author: AuthorData) => author.name.includes(filter))
+        }
         return new Promise((resolve,reject) => {
-            resolve(this.authors)
+            resolve(authorsList)
         })
     }
     getAuthorByName(name: string): Promise<AuthorResponseData> {

@@ -1,0 +1,16 @@
+[
+    {
+        "id": "asm3",
+        "name": "Book 1",
+        "publication_year": 2010,
+        "edition":1,
+        "authors":["m3sd"]
+    },
+    {
+        "id": "mlp7",
+        "name": "Book 2",
+        "publication_year": 2018,
+        "edition":2,
+        "authors":["l8cs"]
+    }
+]

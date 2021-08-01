@@ -13,4 +13,11 @@ describe('Get books test', () => {
         const result = await sut.getBooks()
         expect(result.length).toBeGreaterThan(0)
     })
+
+    it('Retrieve book by name', async () => {
+        const sut = getSut()
+        const result = await sut.getBooks({name: "Book 1"})
+        expect(result[0].name).toEqual("Book 1")
+        expect(result.length).toEqual(1)
+    })
 })

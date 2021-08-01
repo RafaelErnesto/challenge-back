@@ -13,3 +13,11 @@ export const badRequest = (body?:any): HttpResponse => {
         body
     }
 }
+
+export const created = (body?:any): HttpResponse => {
+    return {
+        statusCode: 201,
+        body
+    }
+}
+

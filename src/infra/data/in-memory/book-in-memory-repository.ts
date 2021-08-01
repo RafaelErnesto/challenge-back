@@ -40,10 +40,11 @@ export class BookInMemoryRepository implements BookRepositoryInterface {
 
     updateBook(data: BookData, id: string): Promise<BookResponseData> {
         const bookToUpdate = this.books.filter((book: BookResponseData) => book.id === id)
-        bookToUpdate.name = data.name
-        bookToUpdate.publication_year = data.publication_year
-        bookToUpdate.edition = data.edition
-        bookToUpdate.authors = data.authors
+        const book = new Book(data.name, data.edition, data.publication_year, data.authors)
+        bookToUpdate.name = book.name
+        bookToUpdate.publication_year = book.publication_year
+        bookToUpdate.edition = book.edition
+        bookToUpdate.authors = book.authors
         return new Promise(resolve => resolve(bookToUpdate))
     }
 

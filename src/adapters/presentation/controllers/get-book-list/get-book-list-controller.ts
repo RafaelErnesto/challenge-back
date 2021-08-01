@@ -11,8 +11,8 @@ export class GetBookListController implements BaseController {
         this.getBookList = getBookList
     }
 
-    async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
-        const books = await this.getBookList.getBooks()
+    async handle(httpRequest: HttpRequest): Promise<HttpResponse> {        
+        const books = await this.getBookList.getBooks(httpRequest.body?.filters)
         return new Promise(resolve => resolve(ok(books)))
     }
     

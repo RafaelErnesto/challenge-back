@@ -1,4 +1,4 @@
-import { BookData } from "../../entities/book";
+import { Book, BookData } from "../../entities/book";
 import { AuthorRepositoryInterface } from "../ports/author-repository";
 import { BookRepositoryInterface } from "../ports/book-repository";
 import { BookResponseData } from "./book-response-data";
@@ -14,6 +14,7 @@ export class RegisterBook implements RegisterBookUseCase {
     }
 
     async registerBook(data: BookData): Promise<BookResponseData> {
+        const bookEntity = Book.create(data)
         const book = await this.bookRepository.addBook(data)
         const validationResult = await this.validateAuthors(data.authors)
         if(!validationResult) {

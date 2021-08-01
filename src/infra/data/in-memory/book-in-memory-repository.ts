@@ -1,4 +1,4 @@
-import { Book, BookData } from "../../../entities/book";
+import { BookData } from "../../../entities/book";
 import { BookOptions } from "../../../usecases/get-book-list/get-book-list-use-case";
 import { BookRepositoryInterface } from "../../../usecases/ports/book-repository";
 import { BookResponseData } from "../../../usecases/register-book/book-response-data";
@@ -10,8 +10,7 @@ export class BookInMemoryRepository implements BookRepositoryInterface {
     }
     addBook(data: BookData): Promise<BookResponseData> {
         const {name, edition, publication_year, authors} = data
-        const bookEntity = new Book(name, edition, publication_year, authors)
-        this.books.push(bookEntity)
+        this.books.push(data)
         return new Promise(resolve => resolve({
             name,
             edition,
@@ -40,11 +39,10 @@ export class BookInMemoryRepository implements BookRepositoryInterface {
 
     updateBook(data: BookData, id: string): Promise<BookResponseData> {
         const bookToUpdate = this.books.filter((book: BookResponseData) => book.id === id)
-        const book = new Book(data.name, data.edition, data.publication_year, data.authors)
-        bookToUpdate.name = book.name
-        bookToUpdate.publication_year = book.publication_year
-        bookToUpdate.edition = book.edition
-        bookToUpdate.authors = book.authors
+        bookToUpdate.name = data.name
+        bookToUpdate.publication_year = data.publication_year
+        bookToUpdate.edition = data.edition
+        bookToUpdate.authors = data.authors
         return new Promise(resolve => resolve(bookToUpdate))
     }
 

@@ -11,12 +11,13 @@ describe('Update Book Test', () => {
     it('Ensure UpdateBook usercase returns updated book on success', async () => {
         const sut = getSut()
         const result = await sut.updateBook({
-            name: "Book 1",
+            name: "Update",
             publication_year: 2011,
             edition:1,
             authors:["m3sd"]
         },"asm3")
 
         expect(result.publication_year).toEqual(2011)
+        expect(result.name).toEqual('Update')
     })
 })

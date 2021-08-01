@@ -16,7 +16,7 @@ export class Book {
     public readonly publication_year: number
     public readonly authors: string[]
 
-    constructor(name: string, edition: number, publication_year: number, authors: string[]) {
+    private constructor(name: string, edition: number, publication_year: number, authors: string[]) {
         this.name = name
         this.edition = edition
         this.publication_year = publication_year

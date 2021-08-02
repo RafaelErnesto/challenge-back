@@ -45,7 +45,7 @@ describe('UpdateBookController test', () => {
             
     })
 
-    it('Ensure UpdateBookController returns statusCode 400 when parameter is missing', async () => {
+    it('Ensure UpdateBookController returns statusCode 400 when edition parameter is missing', async () => {
         const sut = getSut()
         try {
             await sut.handle({

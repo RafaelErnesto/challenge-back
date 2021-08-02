@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/RafaelErnesto/challenge-back#readme",
   "devDependencies": {
-    "@shelf/jest-mongodb": "^2.0.1",
+    "@shelf/jest-mongodb": "1.2.3",
     "@types/jest": "^26.0.24",
     "@types/mongodb": "^4.0.7",
     "jest": "^27.0.6",

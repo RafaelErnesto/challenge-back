@@ -21,3 +21,9 @@ export const created = (body?:any): HttpResponse => {
     }
 }
 
+export const deletedWithNoDescription = (body?:any): HttpResponse => {
+    return {
+        statusCode: 204
+    }
+}
+

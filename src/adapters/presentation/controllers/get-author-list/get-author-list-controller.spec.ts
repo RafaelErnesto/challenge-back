@@ -19,8 +19,8 @@ describe('GetAuthorListController test', () => {
     it('Should return statusCode 200 and filtered authors list', async () => {
         const sut = getSut()
         const response = await sut.handle({
-            body: {
-                filter: 'J'
+            query: {
+                name: 'J'
             }
         })
         expect(response.statusCode).toBe(200)
@@ -30,9 +30,7 @@ describe('GetAuthorListController test', () => {
     it('Should return statusCode 400 when filter is not a string', async () => {
         const sut = getSut()
         const response = await sut.handle({
-            body: {
-                filter: 2
-            }
+                query: {name: 2}
         })
         expect(response.statusCode).toBe(400)
     })

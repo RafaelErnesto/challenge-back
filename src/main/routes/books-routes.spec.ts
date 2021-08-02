@@ -189,5 +189,27 @@ describe('Books routes test', () => {
         })
     }, 20000)
 
+    it('Should return statusCode 204 on deletion', async () => {
+
+        const authorRepo = new AuthorsMongodbRepository()
+
+        const bookRepo = new BooksMongodbRepository()
+
+        const author = await authorRepo.addAuthor({
+            name: 'Author 1'
+        })
+
+        const book = await bookRepo.addBook({
+            name: 'Title 1',
+            edition: 2,
+            publication_year: 2014,
+            authors:[author.id]
+        })
+
+        const response = await request(app)
+        .delete(`/api/book/${book.id}`)
+        .expect(204)
+    }, 20000)
+
 
 })

@@ -65,7 +65,47 @@ describe('BooksMongodbRepository test', () => {
             edition: 1,
             authors: [author.id]
         })
+    })
 
+    it('Should update a book', async () => {
+        const sut = new BooksMongodbRepository()
+        const authorsRepo = new AuthorsMongodbRepository()
+
+        const author = await authorsRepo.addAuthor({
+            name: 'Author 1'
+        })
+
+        await sut.addBook({
+            name: 'Test Book 1',
+            publication_year: 2016,
+            edition: 1,
+            authors: [author.id]
+        })
+
+        await sut.addBook({
+            name: 'Test Book 2',
+            publication_year: 2016,
+            edition: 1,
+            authors: [author.id]
+        })
+
+        await sut.addBook({
+            name: 'Test Book 3',
+            publication_year: 2016,
+            edition: 1,
+            authors: [author.id]
+        })
+
+        await sut.addBook({
+            name: 'Test Book 4',
+            publication_year: 2016,
+            edition: 1,
+            authors: [author.id]
+        })
+
+        const result = await sut.getBooks()
+        expect(result.length).toBe(4)
+     
     })
 
 })

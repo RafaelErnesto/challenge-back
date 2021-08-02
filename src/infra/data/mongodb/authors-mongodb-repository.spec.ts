@@ -11,6 +11,11 @@ describe('AuthorsMongodbRepository test', () => {
         await MongoHelper.disconnect()
     })
 
+
+    beforeEach( () => {
+        MongoHelper.clearCollection('authors')
+    })
+
     it('Get all authors from the database', async () => {
        const sut = new AuthorsMongodbRepository()
 
@@ -33,4 +38,27 @@ describe('AuthorsMongodbRepository test', () => {
        const result = await sut.getAllAuthors(0)
        expect(result.length).toBe(4)
     })
+
+    it('Get filtered authors from the database', async () => {
+        const sut = new AuthorsMongodbRepository()
+ 
+        await sut.addAuthor({
+            name: 'Author 1'
+        })
+ 
+        await sut.addAuthor({
+            name: 'Author 2'
+        })
+ 
+        await sut.addAuthor({
+             name: 'Author 3'
+        })
+ 
+        await sut.addAuthor({
+             name: 'Author 4'
+        })
+ 
+        const result = await sut.getAllAuthors(0, 'Author 3')
+        expect(result.length).toBe(1)
+     })
 })

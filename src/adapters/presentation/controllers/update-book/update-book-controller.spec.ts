@@ -30,6 +30,7 @@ describe('UpdateBookController test', () => {
 
     it('Ensure UpdateBookController returns statusCode 400 when name parameter is missing',async () => {
         const sut = getSut()
+        expect.assertions(1)
         try {
             await sut.handle({
                 body: {
@@ -47,11 +48,29 @@ describe('UpdateBookController test', () => {
 
     it('Ensure UpdateBookController returns statusCode 400 when edition parameter is missing', async () => {
         const sut = getSut()
+        expect.assertions(1)
         try {
             await sut.handle({
                 body: {
                     name:'Updated Book',
                     publication_year: 2001,
+                    authors: ['b9jg'],
+                    id: 'asm3'
+                }
+            })
+        }catch(error) {
+            expect(error.body).toBeInstanceOf(MissingParameter)
+        }       
+    })
+
+    it('Ensure UpdateBookController returns statusCode 400 when publication_year parameter is missing', async () => {
+        const sut = getSut()
+        expect.assertions(1)
+        try {
+            await sut.handle({
+                body: {
+                    name:'Updated Book',
+                    edition: 1,
                     authors: ['b9jg'],
                     id: 'asm3'
                 }

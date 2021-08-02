@@ -13,7 +13,7 @@ describe('DeleteBookController test', () => {
     it('Ensure DeleteBookController returns 204 ', async () => {
         const sut = getSut()
         const response = await sut.handle({
-            body: 'mlp7'
+            params:{id: 'mlp7'}
         })
 
         expect(response.statusCode).toBe(204)
@@ -24,7 +24,7 @@ describe('DeleteBookController test', () => {
         expect.assertions(1)
         try {
             await sut.handle({
-                body: undefined
+                params:{id: undefined}
             })
         } catch(error) {
             expect(error.body).toBeInstanceOf(MissingParameter)

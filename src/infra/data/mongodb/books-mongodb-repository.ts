@@ -3,7 +3,7 @@ import { BookOptions } from "../../../usecases/get-book-list/get-book-list-use-c
 import { BookRepositoryInterface } from "../../../usecases/ports/book-repository";
 import { BookResponseData } from "../../../usecases/register-book/book-response-data";
 import { MongoHelper } from "./helper/mongo-helper";
-
+import { ObjectId } from 'mongodb'
 export class BooksMongodbRepository implements BookRepositoryInterface {
     async addBook(data: BookData): Promise<BookResponseData> {
         const result = await MongoHelper.getCollection('books').insertOne(data)
@@ -20,8 +20,23 @@ export class BooksMongodbRepository implements BookRepositoryInterface {
     getBooks(filters?: BookOptions): Promise<BookResponseData[]> {
         throw new Error("Method not implemented.");
     }
-    updateBook(data: BookData, id: string): Promise<BookResponseData> {
-        throw new Error("Method not implemented.");
+    async updateBook(data: BookData, id: string): Promise<BookResponseData> {
+        const updatedBook = await MongoHelper.getCollection('books').updateOne({_id: new ObjectId(id) },{
+            $set: {
+                name: data.name,
+                edition: data.edition,
+                publication_year: data.publication_year,
+                authors: data.authors
+            }
+        })
+
+        return new Promise(resolve => resolve({
+                name: data.name,
+                edition: data.edition,
+                publication_year: data.publication_year,
+                authors: data.authors,
+                id
+        }))
     }
     deleteBook(id: string): Promise<string> {
         throw new Error("Method not implemented.");

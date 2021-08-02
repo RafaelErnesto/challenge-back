@@ -15,11 +15,11 @@ export class GetAuthorListController implements BaseController {
     async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
         let page = 0
         let filter = undefined
-        if(httpRequest.body?.page) {
-            page = httpRequest.body.page
+        if(httpRequest.query?.page) {
+            page = httpRequest.query.page
         }
-        if(httpRequest.body?.filter) {
-            filter = httpRequest.body.filter
+        if(httpRequest.query?.name) {
+            filter = httpRequest.query.name
         }
         if(filter && typeof filter !== 'string') {
             return badRequest('Filter must be string')

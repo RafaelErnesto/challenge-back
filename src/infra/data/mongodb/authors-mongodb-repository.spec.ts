@@ -1,8 +1,6 @@
 import { MongoHelper } from './helper/mongo-helper'
+import { AuthorsMongodbRepository } from './authors-mongodb-repository'
 
-const getMongoUrl = async () => {
-    return process.env.MONGO_URL
-}
 describe('AuthorsMongodbRepository test', () => {
     beforeAll(async () => {
         if(process.env.MONGO_URL){
@@ -13,7 +11,26 @@ describe('AuthorsMongodbRepository test', () => {
         await MongoHelper.disconnect()
     })
 
-    it('Get all authors from the database', () => {
-       
+    it('Get all authors from the database', async () => {
+       const sut = new AuthorsMongodbRepository()
+
+       await sut.addAuthor({
+           name: 'Author 1'
+       })
+
+       await sut.addAuthor({
+           name: 'Author 2'
+       })
+
+       await sut.addAuthor({
+            name: 'Author 3'
+       })
+
+       await sut.addAuthor({
+            name: 'Author 4'
+       })
+
+       const result = await sut.getAllAuthors(0)
+       expect(result.length).toBe(4)
     })
 })

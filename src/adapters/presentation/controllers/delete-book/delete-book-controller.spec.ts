@@ -2,6 +2,7 @@ import  { BaseController } from '../http/base-controller'
 import { BookInMemoryRepository } from '../../../../infra/data/in-memory/book-in-memory-repository'
 import { DeleteBook } from '../../../../usecases/delete-book/delete-book'
 import { DeleteBookController } from './delete-book-controller'
+import { MissingParameter } from '../http/errors/missing-parameter'
 describe('DeleteBookController test', () => {
     const getSut = (): BaseController => {
         const bookRepo = new BookInMemoryRepository()
@@ -16,5 +17,17 @@ describe('DeleteBookController test', () => {
         })
 
         expect(response.statusCode).toBe(204)
+    })
+
+    it('Ensure DeleteBookController returns 400 when id is missing ', async () => {
+        const sut = getSut()
+        expect.assertions(1)
+        try {
+            await sut.handle({
+                body: undefined
+            })
+        } catch(error) {
+            expect(error.body).toBeInstanceOf(MissingParameter)
+        }
     })
 })

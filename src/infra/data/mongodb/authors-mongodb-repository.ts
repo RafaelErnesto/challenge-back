@@ -4,7 +4,11 @@ import { MongoHelper } from "./helper/mongo-helper";
 
 export class AuthorsMongodbRepository implements AuthorRepositoryInterface {
     async getAllAuthors(page: number, filter?: string): Promise<AuthorResponseData[]> {
-        return await MongoHelper.getCollection('authors').find().skip(page).limit(10).toArray()
+        let filters = {}
+        if(filter) {
+            filters = { name: filter} 
+        }
+        return await MongoHelper.getCollection('authors').find(filters).skip(page).limit(10).toArray()
     }
     getAuthorByName(name: string): Promise<AuthorResponseData> {
         throw new Error("Method not implemented.");

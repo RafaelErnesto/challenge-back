@@ -1,0 +1,288 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Challenge Back API",
+        "version": "1.0.0",
+        "title": "Challenge Back API"
+    },
+    "schemes": ["http"],
+    "host": "localhost:3000",
+    "basePath": "/api",
+    "paths" : {
+        "/book" : {
+            "get" : {
+                "summary" : "Returns a list of books",
+                "description": "Get all the books, can be searched by name, edition, authors and publication_year",
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Filter book by name",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "edition",
+                        "in": "query",
+                        "description": "Filter book by edition",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "publication_year",
+                        "in": "query",
+                        "description": "Filter by book by its publication year",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "authors",
+                        "in": "query",
+                        "description": "Filter by book by its authors",
+                        "required": false,
+                        "type": "array",
+                        "items": {
+                            "type":"string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/booksResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            },
+            "post" : {
+                "summary" : "Creates a new Book",
+                "description": "Creates a new book",
+                "produces": ["application/json"],
+                "consumes": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                               "name":{
+                                 "type":"string"
+                               },
+                               "edition": {
+                                 "type":"integer"
+                               },
+                               "publication_year":{
+                                 "type":"integer"
+                               },
+                               "authors": {
+                                 "type": "array",
+                                 "items": {
+                                   "type":"string"
+                                 }
+                               }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/booksResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/book/{id}" : {
+            "put" : {
+                "summary" : "Updates a book",
+                "description": "Updates an existing book",
+                "produces": ["application/json"],
+                "consumes": ["application/json"],
+                "parameters": [
+                    {
+                      "in":"path",
+                      "name":"id",
+                      "type":"string",
+                      "required":true
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                               "name":{
+                                 "type":"string"
+                               },
+                               "edition": {
+                                 "type":"integer"
+                               },
+                               "publication_year":{
+                                 "type":"integer"
+                               },
+                               "authors": {
+                                 "type": "array",
+                                 "items": {
+                                   "type":"string"
+                                 }
+                               }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/booksResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            },
+            "delete" : {
+                "summary" : "Deletes a book",
+                "description": "Deletes an existing book",
+                "produces": ["application/json"],
+                "consumes": ["application/json"],
+                "parameters": [
+                    {
+                      "in":"path",
+                      "name":"id",
+                      "type":"string",
+                      "required":true
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "successful operation",
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/author": {
+          "get" : {
+                "summary" : "Returns a list of authors",
+                "description": "Get all the authors, can be searched by name",
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Filter author by name",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/authorsResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        }
+    }, 
+    "definitions": {
+        "booksResponse": {
+            "type": "array",
+            "items": {
+                "type":"object",
+                "properties": {
+                    "id": {
+                         "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "edition": {
+                        "type": "integer"
+                    },
+                    "publication_year": {
+                        "type": "integer"
+                    },
+                    "authors": {
+                        "type":"array",
+                        "items": {
+                            "properties": {
+                                "id": {
+                                    "type":"string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "authorsResponse": {
+            "type": "array",
+            "items": {
+                "type":"object",
+                "properties": {
+                    "id": {
+                         "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "InvalidResponse": {
+            "type": "object",
+            "properties": {
+                "statusCode": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+
+        }
+    }
+}

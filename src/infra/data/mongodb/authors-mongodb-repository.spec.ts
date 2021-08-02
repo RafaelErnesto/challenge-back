@@ -61,4 +61,15 @@ describe('AuthorsMongodbRepository test', () => {
         const result = await sut.getAllAuthors(0, 'Author 3')
         expect(result.length).toBe(1)
      })
+
+     it('Get author by id from database', async () => {
+        const sut = new AuthorsMongodbRepository()
+ 
+        const author = await sut.addAuthor({
+            name: 'Author 1'
+        })
+ 
+        const result = await sut.getAuthorById(author.id)
+        expect(result.name).toBe('Author 1')
+     })
 })

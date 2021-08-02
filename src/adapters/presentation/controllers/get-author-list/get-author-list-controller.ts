@@ -13,7 +13,7 @@ export class GetAuthorListController implements BaseController {
     }
 
     async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
-        let page = 1
+        let page = 0
         let filter = undefined
         if(httpRequest.body?.page) {
             page = httpRequest.body.page

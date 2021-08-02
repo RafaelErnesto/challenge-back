@@ -38,8 +38,9 @@ export class BooksMongodbRepository implements BookRepositoryInterface {
                 id
         }))
     }
-    deleteBook(id: string): Promise<string> {
-        throw new Error("Method not implemented.");
+    async deleteBook(id: string): Promise<string> {
+        await MongoHelper.getCollection('books').deleteOne({_id: new ObjectId(id)})
+        return new Promise(resolve =>  resolve('Deleted'))
     }
     
 }

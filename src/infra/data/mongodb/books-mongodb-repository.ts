@@ -17,8 +17,8 @@ export class BooksMongodbRepository implements BookRepositoryInterface {
             id: _id.toHexString(),
         }))
     }
-    getBooks(filters?: BookOptions): Promise<BookResponseData[]> {
-        throw new Error("Method not implemented.");
+    async getBooks(filters?: BookOptions): Promise<BookResponseData[]> {
+        return await MongoHelper.getCollection('books').find({}).toArray();
     }
     async updateBook(data: BookData, id: string): Promise<BookResponseData> {
         const updatedBook = await MongoHelper.getCollection('books').updateOne({_id: new ObjectId(id) },{
@@ -30,7 +30,7 @@ export class BooksMongodbRepository implements BookRepositoryInterface {
             }
         })
 
-        return new Promise(resolve => resolve({
+        return new Promise(resolve => resolve({ 
                 name: data.name,
                 edition: data.edition,
                 publication_year: data.publication_year,

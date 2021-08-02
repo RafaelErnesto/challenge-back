@@ -13,10 +13,10 @@ export class DeleteBookController implements BaseController {
 
     async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
         try {
-            if(httpRequest.body === undefined) {
+            if(httpRequest.params.id === undefined) {
                 throw new MissingParameter('id')
             }
-            const result = await this.bookRepository.deleteBook(httpRequest.body)
+            const result = await this.bookRepository.deleteBook(httpRequest.params.id)
             return new Promise(resolve => resolve(deletedWithNoDescription()))
         } catch(error) {
             return new Promise((resolve, reject) => reject(badRequest(error)))

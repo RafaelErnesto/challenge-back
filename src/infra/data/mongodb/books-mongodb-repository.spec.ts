@@ -67,7 +67,7 @@ describe('BooksMongodbRepository test', () => {
         })
     })
 
-    it('Should update a book', async () => {
+    it('Should return list of books', async () => {
         const sut = new BooksMongodbRepository()
         const authorsRepo = new AuthorsMongodbRepository()
 
@@ -105,6 +105,26 @@ describe('BooksMongodbRepository test', () => {
 
         const result = await sut.getBooks()
         expect(result.length).toBe(4)
+     
+    })
+
+    it('Should delete book by id', async () => {
+        const sut = new BooksMongodbRepository()
+        const authorsRepo = new AuthorsMongodbRepository()
+
+        const author = await authorsRepo.addAuthor({
+            name: 'Author 1'
+        })
+
+        await sut.addBook({
+            name: 'Test Book 1',
+            publication_year: 2016,
+            edition: 1,
+            authors: [author.id]
+        })
+
+        const result = await sut.deleteBook(author.id)
+        expect(result).toBe('Deleted')
      
     })
 

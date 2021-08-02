@@ -117,4 +117,42 @@ describe('Books routes test', () => {
         expect(response.body.length).toBe(2)
     })
 
+    it('Should return statusCode 200 and list of filtered books by edition and publication_year', async () => {
+
+        const authorRepo = new AuthorsMongodbRepository()
+
+        const bookRepo = new BooksMongodbRepository()
+
+        const author = await authorRepo.addAuthor({
+            name: 'Author 1'
+        })
+
+        await bookRepo.addBook({
+            name: 'Title 1',
+            edition: 2,
+            publication_year: 2014,
+            authors:[author.id]
+        })
+
+        await bookRepo.addBook({
+            name: 'Title 2',
+            edition: 2,
+            publication_year: 2011,
+            authors:[author.id]
+        })
+
+        await bookRepo.addBook({
+            name: 'Title 3',
+            edition: 1,
+            publication_year: 2020,
+            authors:[author.id]
+        })
+ 
+        const response = await request(app)
+        .get('/api/book?edition=2&publication_year=2014')
+        .expect(200)
+
+        expect(response.body.length).toBe(1)
+    })
+
 })

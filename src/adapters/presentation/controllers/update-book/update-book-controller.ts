@@ -13,16 +13,15 @@ export class UpdateBookController implements BaseController {
 
     async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
         try {
-
             this.validateRequest(httpRequest.body)
 
-            const { name, edition, publication_year, authors, id} = httpRequest.body
+            const { name, edition, publication_year, authors} = httpRequest.body
             const updatedBook = await this.updateBook.updateBook({
                 name,
                 edition,
                 publication_year,
                 authors
-            }, id)
+            }, httpRequest.params.id)
 
             return new Promise(resolve => resolve(ok(updatedBook)))
         } catch(error) {

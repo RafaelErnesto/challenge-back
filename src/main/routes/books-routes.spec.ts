@@ -181,6 +181,7 @@ describe('Books routes test', () => {
             authors:[author.id]
         })
         .expect(200)
+        
         expect(response.body).toMatchObject({
             name: 'Updated Title',
             edition: 2,

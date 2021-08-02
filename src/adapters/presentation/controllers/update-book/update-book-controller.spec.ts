@@ -20,8 +20,8 @@ describe('UpdateBookController test', () => {
                 edition: 1,
                 publication_year: 2001,
                 authors: ['b9jg'],
-                id: 'asm3'
-            }
+            },
+            params: {id: 'asm3'}
         })
 
         expect(response.statusCode).toBe(200)
@@ -37,8 +37,8 @@ describe('UpdateBookController test', () => {
                     edition: 1,
                     publication_year: 2001,
                     authors: ['b9jg'],
-                    id: 'asm3'
-                }
+                },
+                params: {id: 'asm3'}
             })
         } catch(error) {
             expect(error.body).toBeInstanceOf(MissingParameter)
@@ -55,8 +55,9 @@ describe('UpdateBookController test', () => {
                     name:'Updated Book',
                     publication_year: 2001,
                     authors: ['b9jg'],
-                    id: 'asm3'
-                }
+                    
+                },
+                params: {id: 'asm3'}
             })
         }catch(error) {
             expect(error.body).toBeInstanceOf(MissingParameter)
@@ -72,8 +73,9 @@ describe('UpdateBookController test', () => {
                     name:'Updated Book',
                     edition: 1,
                     authors: ['b9jg'],
-                    id: 'asm3'
-                }
+                   
+                },
+                params:  {id: 'asm3'}
             })
         }catch(error) {
             expect(error.body).toBeInstanceOf(MissingParameter)
@@ -89,11 +91,12 @@ describe('UpdateBookController test', () => {
                     name:'Updated Book',
                     edition: 1,
                     publication_year: 2001,
-                    id: 'asm3'
-                }
+                    
+                },
+                params:{id: 'asm3'}
             })
         }catch(error) {
             expect(error.body).toBeInstanceOf(MissingParameter)
-        }       
+        }   
     })
 })

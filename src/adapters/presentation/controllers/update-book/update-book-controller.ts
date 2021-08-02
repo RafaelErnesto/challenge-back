@@ -42,6 +42,10 @@ export class UpdateBookController implements BaseController {
         if(!data.publication_year) {
             throw new MissingParameter('publication_year')
         }
+
+        if(!data.authors || data.authors.length === 0) {
+            throw new MissingParameter('authors')
+        }
     }
     
 }

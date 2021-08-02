@@ -38,4 +38,26 @@ describe('Author routes test', () => {
         .expect(200)
         expect(response.body.length).toBe(3)
     })
+
+    it('Should return statusCode 200 and list of filtered authors', async () => {
+
+        const sut = new AuthorsMongodbRepository()
+
+        await sut.addAuthor({
+            name: 'Author 1'
+        })
+ 
+        await sut.addAuthor({
+            name: 'Author 2'
+        })
+ 
+        await sut.addAuthor({
+             name: 'Author 3'
+        })
+
+        const response = await request(app)
+        .get('/api/author?name=Author 1')
+        .expect(200)
+        expect(response.body.length).toBe(1)
+    })
 })

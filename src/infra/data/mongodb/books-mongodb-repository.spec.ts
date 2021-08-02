@@ -38,4 +38,34 @@ describe('BooksMongodbRepository test', () => {
         })
     })
 
+    it('Should update a book', async () => {
+        const sut = new BooksMongodbRepository()
+        const authorsRepo = new AuthorsMongodbRepository()
+
+        const author = await authorsRepo.addAuthor({
+            name: 'Author 1'
+        })
+        const addedBook = await sut.addBook({
+            name: 'Test Book 1',
+            publication_year: 2016,
+            edition: 1,
+            authors: [author.id]
+        })
+
+        const updatedBook = await sut.updateBook({
+            name: 'Updated Book',
+            publication_year: 2020,
+            edition: 1,
+            authors: [author.id]
+        }, addedBook.id)
+
+        expect(updatedBook).toMatchObject({
+            name: 'Updated Book',
+            publication_year: 2020,
+            edition: 1,
+            authors: [author.id]
+        })
+
+    })
+
 })

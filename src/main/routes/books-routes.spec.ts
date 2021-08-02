@@ -39,7 +39,7 @@ describe('Books routes test', () => {
             authors:[author.id]
         })
         .expect(201)
-    })
+    },20000)
 
     it('Should return statusCode 200 and list of books', async () => {
 
@@ -77,7 +77,7 @@ describe('Books routes test', () => {
         .expect(200)
 
         expect(response.body.length).toBe(3)
-    })
+    },20000)
 
     it('Should return statusCode 200 and list of filtered books by edition', async () => {
 
@@ -115,7 +115,7 @@ describe('Books routes test', () => {
         .expect(200)
 
         expect(response.body.length).toBe(2)
-    })
+    }, 20000)
 
     it('Should return statusCode 200 and list of filtered books by edition and publication_year', async () => {
 
@@ -153,6 +153,6 @@ describe('Books routes test', () => {
         .expect(200)
 
         expect(response.body.length).toBe(1)
-    })
+    }, 20000)
 
 })

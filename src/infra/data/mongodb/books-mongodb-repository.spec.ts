@@ -108,6 +108,63 @@ describe('BooksMongodbRepository test', () => {
      
     })
 
+    it('Should return list of books by filters', async () => {
+        const sut = new BooksMongodbRepository()
+        const authorsRepo = new AuthorsMongodbRepository()
+
+        const author = await authorsRepo.addAuthor({
+            name: 'Author 1'
+        })
+
+        await sut.addBook({
+            name: 'Test Book 1',
+            publication_year: 2015,
+            edition: 1,
+            authors: [author.id]
+        })
+
+        await sut.addBook({
+            name: 'Test Book 2',
+            publication_year: 2016,
+            edition: 1,
+            authors: [author.id]
+        })
+
+        await sut.addBook({
+            name: 'Book 3',
+            publication_year: 2016,
+            edition: 1,
+            authors: [author.id]
+        })
+
+        await sut.addBook({
+            name: 'Book 4',
+            publication_year: 2016,
+            edition: 1,
+            authors: [author.id]
+        })
+
+        const resultByName = await sut.getBooks({name: 'Book 4'})
+        expect(resultByName.length).toBe(1)
+
+        const resultByYear = await sut.getBooks({publication_year: 2016})
+        expect(resultByYear.length).toBe(3)
+
+        const resultByEditon = await sut.getBooks({edition: 2})
+        expect(resultByEditon.length).toBe(0)
+
+        const resultByAuthor = await sut.getBooks({authors: [author.id]})
+        expect(resultByAuthor.length).toBe(4)
+
+        const resultByCombinedFilters = await sut.getBooks({
+            publication_year: 2016,
+            edition: 1,
+            authors: [author.id]
+        })
+        expect(resultByCombinedFilters.length).toBe(3)
+     
+    })
+
     it('Should delete book by id', async () => {
         const sut = new BooksMongodbRepository()
         const authorsRepo = new AuthorsMongodbRepository()

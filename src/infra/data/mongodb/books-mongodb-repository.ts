@@ -18,7 +18,11 @@ export class BooksMongodbRepository implements BookRepositoryInterface {
         }))
     }
     async getBooks(filters?: BookOptions): Promise<BookResponseData[]> {
-        return await MongoHelper.getCollection('books').find({}).toArray();
+        let filterBy = {}
+        if(filters) {
+            filterBy = filters
+        }
+        return await MongoHelper.getCollection('books').find(filterBy).toArray();
     }
     async updateBook(data: BookData, id: string): Promise<BookResponseData> {
         const updatedBook = await MongoHelper.getCollection('books').updateOne({_id: new ObjectId(id) },{

@@ -3,6 +3,7 @@ import { BookInMemoryRepository } from '../../../../infra/data/in-memory/book-in
 import { UpdateBook } from '../../../../usecases//update-book/update-book'
 import { AuthorInMemoryRepository } from '../../../../infra/data/in-memory/author-in-memory-repository'
 import { UpdateBookController } from './update-book-controller'
+import { MissingParameter } from '../http/errors/missing-parameter'
 describe('UpdateBookController test', () => {
     const getSut = (): BaseController => {
         const bookRepo = new BookInMemoryRepository()
@@ -27,9 +28,9 @@ describe('UpdateBookController test', () => {
         expect(response.body.name).toEqual('Updated Book')
     })
 
-    it('Ensure UpdateBookController returns statusCode 400 when parameter is missing', async () => {
+    it('Ensure UpdateBookController returns statusCode 400 when name parameter is missing',async () => {
         const sut = getSut()
-        expect(async () => {
+        try {
             await sut.handle({
                 body: {
                     edition: 1,
@@ -38,6 +39,25 @@ describe('UpdateBookController test', () => {
                     id: 'asm3'
                 }
             })
-        }).rejects.toBeInstanceOf('MissingParamterError')
+        } catch(error) {
+            expect(error.body).toBeInstanceOf(MissingParameter)
+        }
+            
+    })
+
+    it('Ensure UpdateBookController returns statusCode 400 when parameter is missing', async () => {
+        const sut = getSut()
+        try {
+            await sut.handle({
+                body: {
+                    name:'Updated Book',
+                    publication_year: 2001,
+                    authors: ['b9jg'],
+                    id: 'asm3'
+                }
+            })
+        }catch(error) {
+            expect(error.body).toBeInstanceOf(MissingParameter)
+        }       
     })
 })

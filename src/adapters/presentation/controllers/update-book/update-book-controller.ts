@@ -1,5 +1,5 @@
 import { UpdateBookUseCase } from "../../../../usecases/update-book/update-book-use-case";
-import { ok } from "../helpers/http-helper";
+import { ok, badRequest } from "../helpers/http-helper";
 import { BaseController } from "../http/base-controller";
 import { HttpRequest } from "../http/http-request";
 import { HttpResponse } from "../http/http-response";
@@ -26,13 +26,17 @@ export class UpdateBookController implements BaseController {
 
             return new Promise(resolve => resolve(ok(updatedBook)))
         } catch(error) {
-            return new Promise((resolve, reject) => reject(error))
+            return new Promise((resolve, reject) => reject(badRequest(error)))
         }
     }
 
     private validateRequest(data: any) {
         if(!data.name) {
             throw new MissingParameter('name')
+        }
+
+        if(!data.edition) {
+            throw new MissingParameter('edition')
         }
     }
     

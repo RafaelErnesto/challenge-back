@@ -16,7 +16,7 @@ export class GetAuthorListController implements BaseController {
         let page = 0
         let filter = undefined
         if(httpRequest.query?.page) {
-            page = httpRequest.query.page
+            page = Number.parseInt(httpRequest.query.page)
         }
         if(httpRequest.query?.name) {
             filter = httpRequest.query.name

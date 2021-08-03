@@ -1,0 +1,43 @@
+version: "3.7"
+services: 
+    mongo-dev:
+        image: mongo:4.0
+        environment: 
+            MONGO_INITDB_ROOT_USERNAME: root
+            MONGO_INITDB_ROOT_PASSWORD: rootpassword
+            MONGO_INITDB_DATABASE: challenge
+        ports:
+            - 27017:27017
+        volumes:
+            - volume_container_mongodb:/data/db
+        networks: 
+            - challenge-api-network
+    dev:
+        container_name: api-dev
+        build:
+            context: .
+            target: development
+            dockerfile: ./Dockerfile
+        depends_on: 
+            - mongo-dev
+        command: npm run start
+        ports:
+            - 8080:8080
+        networks: 
+            - challenge-api-network
+        volumes:
+            - .:/usr/src/app
+            - /usr/app/node_modules
+        restart: unless-stopped
+        environment:
+            MONGO_USER: root
+            MONGO_PASSWORD: rootpassword
+            MONGO_URL: mongo-dev
+            MONGO_PORT: 27017
+
+networks: 
+    challenge-api-network:
+        
+    
+volumes:
+    volume_container_mongodb:

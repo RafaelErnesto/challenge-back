@@ -6,7 +6,7 @@
         "title": "Challenge Back API"
     },
     "schemes": ["http"],
-    "host": "localhost:3000",
+    "host": "localhost:8080",
     "basePath": "/api",
     "paths" : {
         "/book" : {
@@ -185,7 +185,7 @@
                 ],
                 "responses": {
                     "204": {
-                        "description": "successful operation",
+                        "description": "successful operation"
                     },
                     "400": {
                         "description": "Invalid status value",

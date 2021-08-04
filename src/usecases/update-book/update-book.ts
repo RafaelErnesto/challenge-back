@@ -15,7 +15,7 @@ export class UpdateBook implements UpdateBookUseCase {
 
     async updateBook(data: BookData, id: string): Promise<BookResponseData> {
         if(!await validateAuthorsExists(data.authors, this.authorRepository)) {
-            return new Promise((resolve,reject) => reject('Some authors were not found'))
+            return new Promise((resolve,reject) => reject({message: 'Some authors were not found'}))
         }
         const book = Book.create(data)
         const updatedBook = await this.bookRepository.updateBook(book, id)

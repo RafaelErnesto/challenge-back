@@ -10,7 +10,7 @@ export const ok = (body?:any): HttpResponse => {
 export const badRequest = (body?:any): HttpResponse => {
     return {
         statusCode: 400,
-        body
+        body: body.message
     }
 }
 

@@ -31,7 +31,7 @@ describe('Register book use case test', () => {
                 edition: 2,
                 authors:["test", "test2"]
             })
-        }).rejects.toEqual('Some of the authors were not found')
+        }).rejects.toEqual({message: 'Some authors were not found'})
        
     })
 })

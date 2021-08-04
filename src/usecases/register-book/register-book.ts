@@ -18,7 +18,7 @@ export class RegisterBook implements RegisterBookUseCase {
         const book = await this.bookRepository.addBook(data)
         const validationResult = await validateAuthorsExists(data.authors, this.authorRepository)
         if(!validationResult) {
-            return new Promise((resolve, reject) => reject('Some of the authors were not found'))
+            return new Promise((resolve, reject) => reject({message: 'Some authors were not found'}))
         }
         return new Promise(resolve => resolve(book))
     }

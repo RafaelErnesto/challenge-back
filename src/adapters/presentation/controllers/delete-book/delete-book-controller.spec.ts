@@ -27,7 +27,7 @@ describe('DeleteBookController test', () => {
                 params:{id: undefined}
             })
         } catch(error) {
-            expect(error.body).toBeInstanceOf(MissingParameter)
+            expect(error.body).toBe('Missing parameter error: id')
         }
     })
 })

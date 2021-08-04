@@ -26,7 +26,8 @@ describe('RegisterBook controller test', () => {
     })
     it('Ensure RegisterBookController returns statusCode 400 when authors do not exists', async () => {
         const sut = getSut()
-        expect(async () => { 
+        
+        try {
             await sut.handle({
                 body: {
                     name:'Typescript Book',
@@ -35,10 +36,10 @@ describe('RegisterBook controller test', () => {
                     authors: ['test']
                 }
             })
-        }).rejects.toMatchObject({
-            body: 'Some of the authors were not found',
-            statusCode: 400
-        })
+        } catch(error) {
+            expect(error.statusCode).toBe(400)
+            expect(error.body).toBe('Some authors were not found')
+        }
     })
 
 })

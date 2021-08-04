@@ -41,7 +41,7 @@ describe('UpdateBookController test', () => {
                 params: {id: 'asm3'}
             })
         } catch(error) {
-            expect(error.body).toBeInstanceOf(MissingParameter)
+            expect(error.body).toBe('Missing parameter error: name')
         }
             
     })
@@ -60,7 +60,7 @@ describe('UpdateBookController test', () => {
                 params: {id: 'asm3'}
             })
         }catch(error) {
-            expect(error.body).toBeInstanceOf(MissingParameter)
+            expect(error.body).toBe('Missing parameter error: edition')
         }       
     })
 
@@ -78,7 +78,7 @@ describe('UpdateBookController test', () => {
                 params:  {id: 'asm3'}
             })
         }catch(error) {
-            expect(error.body).toBeInstanceOf(MissingParameter)
+            expect(error.body).toBe('Missing parameter error: publication_year')
         }       
     })
 
@@ -96,7 +96,7 @@ describe('UpdateBookController test', () => {
                 params:{id: 'asm3'}
             })
         }catch(error) {
-            expect(error.body).toBeInstanceOf(MissingParameter)
+            expect(error.body).toBe('Missing parameter error: authors')
         }   
     })
 })

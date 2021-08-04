@@ -19,6 +19,6 @@ describe('Delete book usecase test', () => {
         const sut = getSut()
         expect(async () => {
             await sut.deleteBook('')
-        }).rejects.toMatch('Empty id passed on book deletion')
+        }).rejects.toEqual({message: 'Empty id passed on book deletion'})
     })
 })

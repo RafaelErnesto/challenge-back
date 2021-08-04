@@ -31,6 +31,6 @@ describe('Update Book Test', () => {
             edition:1,
             authors:["test"]
         },"asm3")}
-        ).rejects.toMatch('Some authors were not found')
+        ).rejects.toEqual({message: 'Some authors were not found'})
     })
 })

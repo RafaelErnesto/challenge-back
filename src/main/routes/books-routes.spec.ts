@@ -41,6 +41,26 @@ describe('Books routes test', () => {
         .expect(201)
     },20000)
 
+    it('Should return statusCode 400 when paramter is missing', async () => {
+
+        const authorRepo = new AuthorsMongodbRepository()
+
+        const bookRepo = new BooksMongodbRepository()
+
+        const author = await authorRepo.addAuthor({
+            name: 'Author 1'
+        })
+        
+        request(app)
+            .post('/api/book')
+            .send({
+                edition: 2,
+                publication_year: 2014,
+                authors:[author.id]
+            }).expect(400)
+   
+    })
+
     it('Should return statusCode 200 and list of books', async () => {
 
         const authorRepo = new AuthorsMongodbRepository()
@@ -207,10 +227,8 @@ describe('Books routes test', () => {
             authors:[author.id]
         })
 
-        const response = await request(app)
+        request(app)
         .delete(`/api/book/${book.id}`)
         .expect(204)
     }, 20000)
-
-
 })

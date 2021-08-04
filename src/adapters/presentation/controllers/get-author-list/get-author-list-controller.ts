@@ -22,7 +22,7 @@ export class GetAuthorListController implements BaseController {
             filter = httpRequest.query.name
         }
         if(filter && typeof filter !== 'string') {
-            return badRequest('Filter must be string')
+            return new Promise((resolve, reject) => reject(badRequest('Filter must be string')))
         }
         const result = await this.getAuthorList.getAuthorList(page, filter)
         return new Promise(resolve => resolve(ok(result)))

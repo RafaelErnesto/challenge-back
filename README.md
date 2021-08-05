@@ -1,6 +1,6 @@
 # Challenge-back API
 
-I've tried to implement this API with a Clean Architecture desin in mind, with the project divided in entities, use cases, controllers, ports and etc.
+I've tried to implement this API with a Clean Architecture design in mind, with the project divided in entities, use cases, controllers, ports and etc.
 
 Technologies used in this API:
 - NodeJs
